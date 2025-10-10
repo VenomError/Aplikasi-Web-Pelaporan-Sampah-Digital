@@ -1,17 +1,36 @@
 <?php
 
+use App\Http\Controllers\MailVerifyController;
+use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+/*
+|--------------------------------------------------------------------------
+| Auth Routes (Guest)
+|--------------------------------------------------------------------------
+*/
+Route::middleware('guest')->group(function () {
+    Volt::route('/login', 'auth.login')->name('login');
+    Volt::route('/register', 'auth.register')->name('register');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Email Verification Routes
+|--------------------------------------------------------------------------
+*/
+// Halaman yang memberi tahu user untuk memverifikasi email
+Volt::route('/email/verify', 'auth.email-verification')
+    ->middleware('auth')
+    ->name('verification.notice');
+// Link verifikasi dari email
+Route::get('/email/verify/{id}/{hash}', [MailVerifyController::class, 'verify'])->middleware(['auth', 'signed'])->name('verification.verify');
 
-Route::get('/test-mail', function () {
-    Mail::raw('Ini test email dari Laravel', function ($message) {
-        $message->to('venoms00001@gmail.com')
-            ->subject('Test Kirim Email Laravel');
-    });
-
-    return 'Email terkirim!';
+/*
+|--------------------------------------------------------------------------
+| Authenticated Routes
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::view('/', 'welcome')->name('home');
 });

@@ -13,6 +13,15 @@ Route::middleware('guest')->group(function () {
     Volt::route('/login', 'auth.login')->name('login');
     Volt::route('/register', 'auth.register')->name('register');
 });
+Route::get('/logout', function (\Illuminate\Http\Request $request) {
+    Auth::logout();
+
+    // Hapus session & regenerate token CSRF
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect()->route('login');
+})->middleware('auth')->name('logout');
 
 /*
 |--------------------------------------------------------------------------

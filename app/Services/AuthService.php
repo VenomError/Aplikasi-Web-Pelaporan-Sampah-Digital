@@ -31,11 +31,11 @@ class AuthService
     public function login(
         string $email,
         string $password,
-        bool $remember = fasle
+        bool $remember = false
     ) {
         $isLogin = Auth::attempt(['email' => $email, 'password' => $password], $remember);
         if (!$isLogin) {
-            throw new \Exception("Invali Email or Password");
+            throw new \Exception("Invalid Email or Password");
         }
 
         if (!Auth::user()->hasVerifiedEmail()) {

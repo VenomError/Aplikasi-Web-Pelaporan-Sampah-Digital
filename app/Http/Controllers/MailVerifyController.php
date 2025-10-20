@@ -9,19 +9,9 @@ class MailVerifyController extends Controller
 {
     public function verify(EmailVerificationRequest $request)
     {
-        $request->fulfill(); // Tandai email sebagai verified
-        return redirect('/'); // Redirect setelah verifikasi
+        // Tandai email sebagai verified
+        $request->fulfill();
+        // Redirect setelah verifikasi
+        return redirect('/');
     }
-
-    public function resend()
-    {
-        if (auth()->user()->hasVerifiedEmail()) {
-            return redirect('/');
-        }
-
-        auth()->user()->sendEmailVerificationNotification();
-
-        return back()->with('status', 'verification-link-sent');
-    }
-
 }

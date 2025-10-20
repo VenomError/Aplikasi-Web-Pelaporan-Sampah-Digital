@@ -13,6 +13,5 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        dd(\App\Enum\ReportStatus::cases());
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService
@@ -24,7 +23,7 @@ class AuthService
         $user->save();
         $user->sendEmailVerificationNotification();
         // event(new Registered($user));
-        Auth::login($user , true);
+        Auth::login($user, true);
         return redirect()->route('verification.notice');
     }
 

@@ -12,7 +12,7 @@ new #[Layout('layouts.auth')] class extends Component {
 ?>
 <div>
     <form wire:submit.prevent="register()">
-        <div class="login-userset">
+        <div class="login-userset rounded">
             <div class="login-userheading">
                 <h3>Register</h3>
                 <h4>Access the Dreamspos panel using

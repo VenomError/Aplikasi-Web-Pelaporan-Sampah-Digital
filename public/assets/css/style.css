@@ -15018,7 +15018,7 @@ div#global-loader .whirly-loader:not(:required) {
   color: #ffffff;
 }
 .sidebar .sidebar-menu > ul > li.active svg, .sidebars .sidebar-menu > ul > li.active svg {
-  color: #FE9F43;
+  color: #1A7E00;
 }
 .sidebar .sidebar-menu > ul > li svg, .sidebars .sidebar-menu > ul > li svg {
   min-width: 16px;
@@ -15046,21 +15046,21 @@ div#global-loader .whirly-loader:not(:required) {
 }
 .sidebar .sidebar-menu > ul > li > a:hover, .sidebars .sidebar-menu > ul > li > a:hover {
   background: rgba(254, 159, 67, 0.08);
-  color: #FE9F43;
+  color: #1A7E00;
   border-radius: 5px;
 }
 .sidebar .sidebar-menu > ul > li > a:hover img, .sidebars .sidebar-menu > ul > li > a:hover img {
   filter: invert(72%) sepia(76%) saturate(1430%) hue-rotate(327deg) brightness(103%) contrast(101%);
 }
 .sidebar .sidebar-menu > ul > li > a:hover span, .sidebars .sidebar-menu > ul > li > a:hover span {
-  color: #FE9F43;
+  color: #1A7E00;
 }
 .sidebar .sidebar-menu > ul > li > a:hover svg, .sidebars .sidebar-menu > ul > li > a:hover svg {
-  color: #FE9F43;
+  color: #1A7E00;
 }
 .sidebar .sidebar-menu > ul > li > a.active, .sidebars .sidebar-menu > ul > li > a.active {
   background: rgba(254, 159, 67, 0.08);
-  color: #FE9F43;
+  color: #1A7E00;
   border-radius: 5px;
 }
 .sidebar .sidebar-menu > ul > li > a.active svg, .sidebars .sidebar-menu > ul > li > a.active svg {
@@ -15070,13 +15070,13 @@ div#global-loader .whirly-loader:not(:required) {
   filter: invert(72%) sepia(76%) saturate(1430%) hue-rotate(327deg) brightness(103%) contrast(101%);
 }
 .sidebar .sidebar-menu > ul > li > a.active span, .sidebars .sidebar-menu > ul > li > a.active span {
-  color: #FE9F43;
+  color: #1A7E00;
 }
 .sidebar .sidebar-menu > ul > li > a.active .menu-arrow, .sidebars .sidebar-menu > ul > li > a.active .menu-arrow {
-  background: #FFEDDC;
+  background: #4CE125;
 }
 .sidebar .sidebar-menu > ul > li > a.active .menu-arrow::before, .sidebars .sidebar-menu > ul > li > a.active .menu-arrow::before {
-  border-color: #FE9F43;
+  border-color: #1A7E00;
 }
 .sidebar .sidebar-menu > ul > li > a span, .sidebars .sidebar-menu > ul > li > a span {
   font-size: 15px;
@@ -15091,7 +15091,7 @@ div#global-loader .whirly-loader:not(:required) {
   filter: invert(72%) sepia(76%) saturate(1430%) hue-rotate(327deg) brightness(103%) contrast(101%);
 }
 .sidebar .sidebar-menu > ul > li.active a span, .sidebars .sidebar-menu > ul > li.active a span {
-  color: #FE9F43;
+  color: #1A7E00;
 }
 .sidebar .sidebar-menu > ul > li.submenu ul, .sidebars .sidebar-menu > ul > li.submenu ul {
   border-bottom: 1px solid rgba(222, 226, 230, 0.5);
@@ -15110,7 +15110,7 @@ div#global-loader .whirly-loader:not(:required) {
   color: #092C4C;
 }
 .sidebar .sidebar-menu > ul > li.submenu ul li a.active:after, .sidebars .sidebar-menu > ul > li.submenu ul li a.active:after {
-  background: #FE9F43;
+  background: #1A7E00;
   border: 2px solid #FDB;
 }
 .sidebar .sidebar-menu > ul > li.submenu ul li a::after, .sidebars .sidebar-menu > ul > li.submenu ul li a::after {
@@ -15128,7 +15128,7 @@ div#global-loader .whirly-loader:not(:required) {
   color: #1A7E00;
 }
 .sidebar .sidebar-menu > ul > li.submenu ul li a:hover:after, .sidebars .sidebar-menu > ul > li.submenu ul li a:hover:after {
-  background: #FE9F43;
+  background: #1A7E00;
   border: 2px solid #FDB;
 }
 .sidebar .sidebar-menu > ul > li.submenu-open ul, .sidebars .sidebar-menu > ul > li.submenu-open ul {
@@ -15162,14 +15162,14 @@ div#global-loader .whirly-loader:not(:required) {
   color: #1A7E00;
 }
 .sidebar .sidebar-menu > ul > li.submenu-open ul li a.active:after, .sidebars .sidebar-menu > ul > li.submenu-open ul li a.active:after {
-  background: #FE9F43;
+  background: #1A7E00;
   border: 2px solid #FDB;
 }
 .sidebar .sidebar-menu > ul > li.submenu-open ul li a:hover, .sidebars .sidebar-menu > ul > li.submenu-open ul li a:hover {
   color: #1A7E00;
 }
 .sidebar .sidebar-menu > ul > li.submenu-open ul li a:hover:after, .sidebars .sidebar-menu > ul > li.submenu-open ul li a:hover:after {
-  background: #FE9F43;
+  background: #1A7E00;
   border: 2px solid #FDB;
 }
 .sidebar .sidebar-menu > ul > li.submenu-open ul li a:hover span, .sidebars .sidebar-menu > ul > li.submenu-open ul li a:hover span {
@@ -15178,7 +15178,7 @@ div#global-loader .whirly-loader:not(:required) {
 .sidebar .sidebar-menu > ul > li.submenu-open ul > li.active a, .sidebars .sidebar-menu > ul > li.submenu-open ul > li.active a {
   background: rgba(254, 159, 67, 0.08);
   border-radius: 5px;
-  color: #FE9F43;
+  color: #1A7E00;
 }
 .sidebar .sidebar-menu > ul > li.submenu-open ul > li.active a span, .sidebars .sidebar-menu > ul > li.submenu-open ul > li.active a span {
   color: #1A7E00;
@@ -15199,24 +15199,24 @@ div#global-loader .whirly-loader:not(:required) {
   padding-bottom: 0;
 }
 .sidebar .sidebar-menu > ul li.active a, .sidebars .sidebar-menu > ul li.active a {
-  color: #FE9F43;
+  color: #1A7E00;
 }
 .sidebar .sidebar-menu > ul li.active svg, .sidebars .sidebar-menu > ul li.active svg {
-  color: #FE9F43;
+  color: #1A7E00;
 }
 .sidebar .sidebar-menu > ul li .submenu > a.active, .sidebars .sidebar-menu > ul li .submenu > a.active {
   background: rgba(254, 159, 67, 0.08);
-  color: #FE9F43;
+  color: #1A7E00;
   border-radius: 5px;
 }
 .sidebar .sidebar-menu > ul li .submenu > a.active span, .sidebars .sidebar-menu > ul li .submenu > a.active span {
-  color: #FE9F43;
+  color: #1A7E00;
 }
 .sidebar .sidebar-menu > ul li .submenu > a.active .menu-arrow, .sidebars .sidebar-menu > ul li .submenu > a.active .menu-arrow {
-  background: #FFEDDC;
+  background: #4CE125;
 }
 .sidebar .sidebar-menu > ul li .submenu > a.active .menu-arrow::before, .sidebars .sidebar-menu > ul li .submenu > a.active .menu-arrow::before {
-  border-color: #FE9F43;
+  border-color: #1A7E00;
 }
 .sidebar .sidebar-menu > ul li .submenu .submenu-two > a.active, .sidebars .sidebar-menu > ul li .submenu .submenu-two > a.active {
   background: transparent;
@@ -15255,7 +15255,7 @@ div#global-loader .whirly-loader:not(:required) {
   color: #1A7E00;
 }
 .sidebar .sidebar-menu .submenu-open .submenu ul li a:hover:after, .sidebars .sidebar-menu .submenu-open .submenu ul li a:hover:after {
-  background: #FE9F43;
+  background: #1A7E00;
   border: 2px solid #FDB;
 }
 .sidebar .sidebar-menu .menu-arrow, .sidebars .sidebar-menu .menu-arrow {
@@ -15309,7 +15309,7 @@ div#global-loader .whirly-loader:not(:required) {
   transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
-  background: #FFEDDC;
+  background: #4CE125;
 }
 .sidebar .nav-link, .sidebars .nav-link {
   display: -webkit-box;

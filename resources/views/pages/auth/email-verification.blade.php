@@ -20,28 +20,25 @@ new #[Layout('layouts.auth')] class extends Component {
 };
 ?>
 <div>
-    <div class="login-userset">
+    <div class="login-userset rounded">
         <a class="login-logo logo-white" href="index.html">
             <x-img src="assets/img/logo-white.png" alt="" />
         </a>
         <div class="login-userheading text-center">
             <h3>Verify Your Email</h3>
-            <h4 class="verfy-mail-content">We've sent a link to your email <b class="text-primary">{{ auth()->user()->email }}</b> Please follow the
+            <h4 class="verfy-mail-content">We've sent a link to your email <b
+                    class="text-primary">{{ auth()->user()->email }}</b> Please follow the
                 link
                 inside to continue</h4>
         </div>
         <div class="signinform text-center">
         </div>
         <div class="form-login">
-             <button
-                    class="btn btn-login"
-                    wire:loading.attr='disabled'
-                    wire:target='resend()'
-                >
+            <button class="btn btn-login" wire:loading.attr='disabled' wire:target='resend()'>
 
-                    <span wire:loading.remove wire:target='resend()'>Resend</span>
-                    <span wire:loading wire:target='resend()'>Sending...</span>
-                </button>
+                <span wire:loading.remove wire:target='resend()'>Resend</span>
+                <span wire:loading wire:target='resend()'>Sending...</span>
+            </button>
         </div>
     </div>
 </div>

@@ -17,7 +17,7 @@ class RegisterForm extends Form
     {
         return [
             'name' => 'required|string',
-            'email' => 'required|email|unique:users,email:rfc,dns',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed:password_confirmation',
         ];
     }

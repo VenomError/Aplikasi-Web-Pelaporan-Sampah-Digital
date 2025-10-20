@@ -8,11 +8,7 @@
         <title>{{ $title ?? 'Login' }}</title>
 
         <!-- Favicon -->
-        <x-link
-            type="image/x-icon"
-            href="assets/img/favicon.png"
-            rel="shortcut icon"
-        />
+        <x-link type="image/x-icon" href="landing/assets/images/favicon/favicon.png" rel="shortcut icon" />
 
         <!-- Bootstrap CSS -->
         <x-link href="assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -37,18 +33,17 @@
                 <div class="login-wrapper login-new">
                     <div class="container">
                         <div class="login-content user-login">
-                            <div class="login-logo">
-                                <x-img src="assets/img/logo.png" alt="img" />
+                            {{-- <div class="login-logo">
+                                <x-img src="logo.png" alt="img" />
                                 <a class="login-logo logo-white" href="/auth/login">
-                                    <x-img src="assets/img/logo-white.png" alt="" />
+                                    <x-img src="logo-white.png" alt="" />
                                 </a>
-                            </div>
+                            </div> --}}
                             {{ $slot }}
 
                         </div>
                         <div class="d-flex justify-content-center align-items-center copyright-text my-4">
-                            <p>Copyright &copy; 2023 DreamsPOS. All rights
-                                reserved</p>
+
                         </div>
                     </div>
                 </div>

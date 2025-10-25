@@ -34,6 +34,21 @@ new #[Layout('layouts.auth')] class extends Component {
                 @enderror
             </div>
             <div class="form-login">
+                <label class="form-label">Phone Number</label>
+                <div class="form-addons">
+                    <input
+                        class="form-control"
+                        type="tel"
+                        placeholder="Enter Phone Number"
+                        wire:model="form.phone"
+                    >
+                    <x-img src="assets/img/icons/users1.svg" alt="img" />
+                </div>
+                @error('form.phone')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-login">
                 <label class="form-label">Email
                     Address</label>
                 <div class="form-addons">
@@ -46,6 +61,21 @@ new #[Layout('layouts.auth')] class extends Component {
                     <x-img src="assets/img/icons/mail.svg" alt="img" />
                 </div>
                 @error('form.email')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-login">
+                <label class="form-label">Address</label>
+                <div class="form-addons">
+                    <textarea
+                        class="form-control"
+                        rows="5"
+                        placeholder="Enter Address"
+                        wire:model='form.address'
+                    ></textarea>
+                    <x-img src="assets/img/icons/mail.svg" alt="img" />
+                </div>
+                @error('form.address')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>

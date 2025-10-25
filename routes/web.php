@@ -43,6 +43,6 @@ Route::get('/email/verify/{id}/{hash}', [MailVerifyController::class, 'verify'])
 Route::middleware(['auth', 'verified'])->group(function () {
     Volt::route('/', 'landing.index')->name('home');
 });
-Route::middleware(['auth', 'verified'])->group(function () {
-    Volt::route('/dashboard', 'dashboard.index')->name('dashboard.index');
+Route::prefix('/dashboard')->name('dashboard')->group(function () {
+    Volt::route('/', 'dashboard.index');
 });

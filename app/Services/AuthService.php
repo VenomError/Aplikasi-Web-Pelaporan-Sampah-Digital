@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Enum\UserRole;
 use App\Models\User;
+use App\Repository\UserRepository;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService
@@ -12,17 +14,23 @@ class AuthService
         string $name,
         string $email,
         string $password,
+        string $phone,
+        string $address,
     ) {
 
-        $user = new User([
-            'name' => $name,
-            'email' => $email,
-            'password' => $password,
-        ]);
-
-        $user->save();
-        $user->sendEmailVerificationNotification();
-        // event(new Registered($user));
+        $userRepo = new UserRepository();
+        $user = $userRepo->createMember(
+            [
+                'name' => $name,
+                'email' => $email,
+                'password' => $password,
+            ],
+            [
+                'phone' => $phone,
+                'address' => $address,
+                'point' => 0,
+            ]
+        );
         Auth::login($user, true);
         return redirect()->route('verification.notice');
     }

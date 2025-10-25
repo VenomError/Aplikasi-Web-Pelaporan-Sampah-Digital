@@ -13,12 +13,17 @@ class RegisterForm extends Form
     public $password;
     public $password_confirmation;
 
+    public $phone;
+    public $address;
+
     public function rules()
     {
         return [
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed:password_confirmation',
+            'phone' => 'required',
+            'address' => 'required',
         ];
     }
 
@@ -31,6 +36,8 @@ class RegisterForm extends Form
                 $this->name,
                 $this->email,
                 $this->password,
+                $this->phone,
+                $this->address
             );
         } catch (\Throwable $th) {
             throw $th;

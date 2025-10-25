@@ -19,19 +19,23 @@ class Member extends Model
         'point' => 'int',
     ];
 
-    public function reports(){
+    public function reports()
+    {
         return $this->hasMany(Report::class);
     }
 
-    public function account(){
-        return $this->hasOne(User::class);
+    public function account()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function pointRedemtions(){
+    public function pointRedemtions()
+    {
         return $this->hasMany(PointRedemtion::class);
     }
 
-    public function pointHistories(){
+    public function pointHistories()
+    {
         return $this->hasMany(PointHistory::class);
     }
 }

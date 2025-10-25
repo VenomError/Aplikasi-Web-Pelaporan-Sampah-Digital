@@ -11,6 +11,6 @@ class Operator extends Model
     ];
     public function account()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

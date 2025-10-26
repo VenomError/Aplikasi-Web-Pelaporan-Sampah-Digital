@@ -45,4 +45,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 Route::prefix('/dashboard')->name('dashboard')->group(function () {
     Volt::route('/', 'dashboard.index');
+
+    Volt::route('/account/{role}' , 'account.account-list')->name('.account.list');
 });

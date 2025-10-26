@@ -112,7 +112,7 @@
                                         display: none;
                                     }
                                     &.active {
-                                        background-color: rgba(254, 159, 67, 0.08);
+                                        background-color: rgba(26, 126, 0, 0.08);
                                         color: $primary;
                                         border-radius: 8px;
                                         padding: 10px 18px;
@@ -132,9 +132,9 @@
                                 }
                             }
                         }
-                    }     
+                    }
                 }
-                
+
             }
         }
     }
@@ -155,7 +155,7 @@
             border-bottom: 0;
             padding-bottom: 0;
         }
-       
+
     }
     .new-employee-field {
         span {
@@ -185,7 +185,7 @@
                 display: none
             }
         }
-    
+
     }
     ul {
         li {
@@ -286,15 +286,15 @@
                     .submenu {
                         .menu-arrow {
                             display: block !important;
-                        } 
+                        }
                         .subdrop ~ ul{
                             display: block !important;
                         }
-                    } 
+                    }
                 }
-            } 
-        } 
-    } 
+            }
+        }
+    }
 }
 .settings-bottom-btn {
     margin-top: 40px;
@@ -645,7 +645,7 @@ textarea {
 
             }
         }
-    } 
+    }
 }
 .bank-settings {
     .btn-list,.btn-grid {
@@ -779,7 +779,7 @@ svg {
         width: 18px;
         height: 18px;
         color: $white;
-    } 
+    }
 }
 .search-path .btn-filter.setclose > .filter-icon {
     display: none;

@@ -47,7 +47,7 @@
         -o-transition: all 0.5s ease;
         -ms-transition: all 0.5s ease;
         -webkit-transition: all 0.5s ease;
-        
+
     }
     .emoj-group {
         position: absolute;
@@ -161,18 +161,18 @@
 			font-size: $font-size-16;
 			color: #424242;
 		}
-		
+
 		.dropdown-menu .dropdown-item span {
 			float: right;
 			font-size: $font-size-18;
 			color: #424242;
 		}
-		
+
 		.dropdown-menu .dropdown-item.active {
 			background: none;
 			color: inherit;
 		}
-		
+
 		.dropdown-menu .dropdown-item:focus,
 		.dropdown-menu .dropdown-item:hover,
 		.dropdown-menu .dropdown-item:active {
@@ -186,7 +186,7 @@
 			border-radius: 8px;
 			min-width: 173px;
 		}
-		
+
 		.dropdown-menu .dropdown-item {
 			margin: 0;
 			position: relative;
@@ -224,7 +224,7 @@
 			align-items: center;
 		}
 	}
-    		
+
 @-webkit-keyframes wave {
 	0%,100%,60% {
 		-webkit-transform: initial;
@@ -3007,7 +3007,7 @@ ul.list-inline .list-inline-item {
 	display: flex;
 	display: -webkit-flex;
 	align-items: center;
-	-webkit-align-items: center;	
+	-webkit-align-items: center;
     justify-content: center;
     -webkit-justify-content: center;
 }
@@ -3579,8 +3579,8 @@ ul.list-inline .list-inline-item {
 }
 
 .sidebar .user-list li a:hover {
-	background-color: rgba(254, 159, 67, 0.08);
-	border: 1px solid rgba(254, 159, 67, 0.08);
+	background-color: rgba(26, 126, 0, 0.08);
+	border: 1px solid rgba(26, 126, 0, 0.08);
 	transition: ease all 0.5s;
 	-webkit-transition: ease all 0.5s;
 	-ms-transition: ease all 0.5s;
@@ -3771,13 +3771,13 @@ ul.list-inline .list-inline-item {
 .group-description h5 a:hover {
 	color: #650681 !important;
 }
-.group-description p { 
+.group-description p {
 	color: #424242;
 	font-size: $font-size-16;
 	font-weight: $font-weight-normal;
 	margin-bottom: 10px;
 }
-.group-description p.description-date { 
+.group-description p.description-date {
 	color: #424242;
 	font-size: 12px;
 	font-weight: $font-weight-normal;
@@ -4064,14 +4064,14 @@ ul.list-inline .list-inline-item {
             }
         }
     }
-    
+
 }
 .chat-cont-right {
     @include transition(all 0.4s);
     .chat-scroll {
         max-height: calc(100vh - 293px);
         overflow-y: auto;
-        
+
     }
     .msg_head {
         .back-user-list {
@@ -4174,7 +4174,7 @@ ul.list-inline .list-inline-item {
                        > div {
                             margin: 0 1px;
                         }
-                        
+
                         img {
                             max-width: 100%;
                         }
@@ -4258,7 +4258,7 @@ ul.list-inline .list-inline-item {
                     + .msg-box {
                         margin-top: 5px;
                     }
-                    
+
             }
             .chat-msg-info {
                 display: -webkit-box;
@@ -4302,7 +4302,7 @@ ul.list-inline .list-inline-item {
                > div {
                     margin: 0 1px;
                 }
-                
+
                 img {
                     max-width: 100%;
                 }
@@ -4319,7 +4319,7 @@ ul.list-inline .list-inline-item {
                 }
             }
         }
-           
+
         }
         .chat-date {
             font-size: $font-size-base;
@@ -4346,7 +4346,7 @@ ul.list-inline .list-inline-item {
             }
         }
     }
-    
+
 }
 .card-footer {
     background-color: $white;

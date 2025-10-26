@@ -68,7 +68,7 @@ class AddAccountForm extends Form
             }
             DB::commit();
             $this->reset();
-            sweetalert("Create Account {$role->value} Success", title: "Success");
+            sweetalert("Create Account {$role->value} Success , Please Check Email {$this->email} for Verification", title: "Success");
             return $account;
         } catch (\Throwable $th) {
             DB::rollBack();

@@ -1,4 +1,4 @@
-@props(['id' => 'modalID', 'title' => '', 'size' => 'md', 'backDrop' => false])
+@props(['id' => 'modalID', 'title' => null, 'size' => 'md', 'backDrop' => false])
 
 <div
     x-data="{
@@ -20,6 +20,7 @@
             if (instance) instance.hide();
         }
     "
+    wire:ignore
 >
     <div
         class="modal fade modal-{{ $size }}"
@@ -31,16 +32,19 @@
     >
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ Str::title($title) }}</h5>
-                    <button
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        type="button"
-                        aria-label="Close"
-                        @click="$dispatch('hide:modal', { id: modalId })"
-                    ></button>
-                </div>
+                @if ($title)
+                    <div class="modal-header">
+                        <h5 class="modal-title h4">{{ Str::title($title) }}</h5>
+                        <button
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            type="button"
+                            aria-label="Close"
+                            @click="$dispatch('hide:modal', { id: modalId })"
+                        ></button>
+                    </div>
+                @endif
+
                 <div class="modal-body">
                     {{ $slot }}
                 </div>

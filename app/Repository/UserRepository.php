@@ -57,4 +57,10 @@ class UserRepository
         return $account;
     }
 
+
+    public function delete(User $user): bool|null
+    {
+        return $user->forceDelete();
+    }
+
 }

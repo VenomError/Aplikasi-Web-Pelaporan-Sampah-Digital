@@ -5,12 +5,17 @@ use Livewire\Attributes\Url;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
+use App\Repository\UserRepository;
+use Illuminate\Container\Attributes\Cache;
 
 new class extends Component {
     use WithPagination;
-    #[Url('search', except: '')]
+    #[Cache]
     public $search = '';
     public UserRole $role;
+
+    // delete handle
+    public User $selectedUser;
 
     public function mount(UserRole $role)
     {
@@ -28,17 +33,28 @@ new class extends Component {
         $userQuery = User::query()->role($this->role);
 
         $userQuery->when($this->search, function ($q) {
-            $q->where(function ($subQuery) {
-                $subQuery->where('name', 'like', '%' . $this->search . '%')->orWhere('email', 'like', '%' . $this->search . '%');
-            });
+            $q->search(['name', 'email'], $this->search);
         });
 
         return $userQuery->paginate(5);
     }
 
-    public function editAccount(User $user)
+    public function confirmDelete(User $user)
     {
-        $this->dispatch('show:modal', id: 'modalEditAccount');
+        $this->dispatch('show:modal', id: 'modalDeleteAccount');
+        $this->selectedUser = $user;
+    }
+
+    public function deleteConfirmed()
+    {
+        $repo = new UserRepository();
+        if ($repo->delete($this->selectedUser)) {
+            sweetalert('Delete User Success', title: 'Success');
+        } else {
+            sweetalert('Delete User Success', title: 'Success', type: 'error');
+        }
+        $this->dispatch('hide:modal', id: 'modalDeleteAccount');
+        $this->reset('selectedUser');
     }
 };
 ?>
@@ -98,15 +114,8 @@ new class extends Component {
                             />
                             <x-button.icon-action
                                 type="button"
-                                wire:click="editAccount({{ $user->id }})"
-                                target="editAccount({{ $user->id }})"
-                                icon="ri ri-edit-box-line"
-                                color="warning"
-                            />
-                            <x-button.icon-action
-                                type="button"
-                                wire:click="editAccount({{ $user->id }})"
-                                target="editAccount({{ $user->id }})"
+                                wire:click="confirmDelete({{ $user->id }})"
+                                target="confirmDelete({{ $user->id }})"
                                 icon="ri ri-delete-bin-line"
                                 color="danger"
                             />
@@ -118,11 +127,8 @@ new class extends Component {
             @endforelse
         </x-slot:body>
     </x-table>
-</div>
-<x-slot:modal>
     <x-modal id="modalAddAccount" title="Add Account {{ $role }}" backDrop>
         <livewire:user.user-add :role="$role" />
     </x-modal>
-    <x-modal id="modalEditAccount" title="Edit Account {{ $role }}" backDrop>
-    </x-modal>
-</x-slot:modal>
+    <x-modal-delete id="modalDeleteAccount" confirmAction="deleteConfirmed()" />
+</div>

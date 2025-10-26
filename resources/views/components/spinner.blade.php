@@ -2,6 +2,7 @@
     'type' => 'border',
     'color' => 'primary',
     'size' => 'sm',
+    'addClass' => ''
 ])
 
 @php
@@ -9,6 +10,6 @@
     $sizeClass = $size ? "{$baseClass}-{$size}" : '';
 @endphp
 
-<div {{ $attributes->merge() }} class="{{ $baseClass }}  {{ $sizeClass }}" role="status">
+<div {{ $attributes->merge() }} class="{{ $baseClass }}  {{ $sizeClass }} {{ $addClass }}" role="status">
     <span class="visually-hidden">Loading...</span>
 </div>

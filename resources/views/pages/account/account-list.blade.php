@@ -121,6 +121,7 @@ new class extends Component {
 </div>
 <x-slot:modal>
     <x-modal id="modalAddAccount" title="Add Account {{ $role }}" backDrop>
+        <livewire:user.user-add :role="$role" />
     </x-modal>
     <x-modal id="modalEditAccount" title="Edit Account {{ $role }}" backDrop>
     </x-modal>

@@ -28,7 +28,7 @@ class UserRepository
     {
         $account = $this->create($userData, UserRole::ADMIN);
 
-        $admin = new Admin();
+        $admin = new Admin($userData);
         $admin->account()->associate($account);
         $admin->save();
 

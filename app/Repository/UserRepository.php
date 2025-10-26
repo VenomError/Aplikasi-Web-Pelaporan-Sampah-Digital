@@ -18,6 +18,7 @@ class UserRepository
         $user = new User();
         $user->fill($data);
         $user->save();
+        $user->assignRole($role);
         $user->sendEmailVerificationNotification();
 
         return $user;

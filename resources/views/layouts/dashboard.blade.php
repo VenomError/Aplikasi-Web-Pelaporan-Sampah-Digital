@@ -19,15 +19,30 @@
         <!-- animation CSS -->
         <x-link href="assets/css/animate.css" rel="stylesheet" />
 
+        <x-link href="assets/plugins/material/materialdesignicons.css" rel="stylesheet" />
+
+        @stack('style')
         <!-- Select2 CSS -->
         <x-link href="assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
-
         <!-- Fontawesome CSS -->
         <x-link href="assets/plugins/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
         <x-link href="assets/plugins/fontawesome/css/all.min.css" rel="stylesheet" />
 
         <!-- Main CSS -->
         <x-link href="assets/css/style.css" rel="stylesheet" />
+        <style>
+            .ri-spin {
+                display: inline-block;
+                animation: ri-spin 1s linear infinite;
+            }
+
+
+            @keyframes ri-spin {
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
         @vite(['resources/css/app.css'])
     </head>
 
@@ -52,6 +67,8 @@
                 </div>
             </div>
 
+            {{ $modal ?? '' }}
+
         </div>
         <!-- /Main Wrapper -->
 
@@ -64,11 +81,10 @@
         <!-- Slimscroll JS -->
         <x-script src="assets/js/jquery.slimscroll.min.js"></x-script>
 
-        <!-- Bootstrap Core JS -->
-        <x-script src="assets/js/bootstrap.bundle.min.js"></x-script>
-
         @stack('script')
 
+        <!-- Bootstrap Core JS -->
+        <x-script src="assets/js/bootstrap.bundle.min.js"></x-script>
         <!-- Chart JS -->
         <x-script src="assets/plugins/apexchart/apexcharts.min.js"></x-script>
         <x-script src="assets/plugins/apexchart/chart-data.js"></x-script>

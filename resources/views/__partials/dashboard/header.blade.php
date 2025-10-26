@@ -74,7 +74,7 @@
             <div class="dropdown-menu menu-drop-user">
                 <div class="profilename">
                     <div class="profileset">
-                        <span class="user-img"><img src="assets/img/profiles/avator1.jpg" alt="">
+                        <span class="user-img"><x-img src="assets/img/profiles/avator1.jpg" alt="" />
                             <span class="status online"></span></span>
                         <div class="profilesets">
                             <h6>John Smilga</h6>
@@ -87,9 +87,9 @@
                     <a class="dropdown-item" href="general-settings.html"><i class="me-2"
                             data-feather="settings"></i>Settings</a>
                     <hr class="m-0">
-                    <a class="dropdown-item logout pb-0" href="signin.html"><img class="me-2"
+                    <a class="dropdown-item logout pb-0" href="signin.html"><x-img class="me-2"
                             src="assets/img/icons/log-out.svg" alt="img"
-                        >Logout</a>
+                        />Logout</a>
                 </div>
             </div>
         </li>

@@ -58,10 +58,23 @@ class UserSeeder extends Seeder
                                 'address' => fake()->address(),
                             ];
 
-
-                            $userRepo->createMember($userData, $memberData);
-                        } else {
-                            $userRepo->create($userData, UserRole::tryFrom($role));
+                            $user = \App\Models\User::create($userData);
+                            $user->assignRole(UserRole::tryFrom($role));
+                            $member = new \App\Models\Member($memberData);
+                            $member->account()->associate($user);
+                            $member->save();
+                        } elseif($role == UserRole::ADMIN->value) {
+                            $user = \App\Models\User::create($userData);
+                            $user->assignRole(UserRole::tryFrom($role));
+                            $admin = new \App\Models\Admin();
+                            $admin->account()->associate($user);
+                            $admin->save();
+                        }else{
+                            $user = \App\Models\User::create($userData);
+                            $user->assignRole(UserRole::tryFrom($role));
+                            $operator = new \App\Models\Operator();
+                            $operator->account()->associate($user);
+                            $operator->save();
                         }
 
                     }, "Membuat {$role} {$step}");

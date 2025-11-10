@@ -40,11 +40,11 @@ Route::get('/email/verify/{id}/{hash}', [MailVerifyController::class, 'verify'])
 | Authenticated Routes
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'verified'])->group(function () {
-    Volt::route('/', 'landing.index')->name('home');
-});
-Route::prefix('/dashboard')->name('dashboard')->group(function () {
+Volt::route('/', 'landing.index')->name('home');
+
+Route::prefix('/dashboard')->middleware(['auth', 'verified'])->name('dashboard')->group(function () {
     Volt::route('/', 'dashboard.index');
 
-    Volt::route('/account/{role}' , 'account.account-list')->name('.account.list');
+    Volt::route('/account/{role}', 'account.account-list')->name('.account.list');
+    Volt::route('/incentive', 'incentive.incentive-list')->name('.incentive.list');
 });

@@ -40,13 +40,15 @@ class AuthService
         string $password,
         bool $remember = false
     ) {
+
         $isLogin = Auth::attempt(['email' => $email, 'password' => $password], $remember);
         if (!$isLogin) {
             throw new \Exception("Invalid Email or Password");
         }
 
         if (!Auth::user()->hasVerifiedEmail()) {
-            return redirect()->route('verification.notice');
+            Auth::logout();
+            throw new \Exception("Email belum di Verifikasi ");
         }
 
         return $isLogin;

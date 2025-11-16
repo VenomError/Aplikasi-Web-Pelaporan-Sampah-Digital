@@ -25,7 +25,8 @@ class Report extends Model
         'status' => ReportStatus::class
     ];
 
-    public function pointRedemtion(){
+    public function pointRedemtion()
+    {
         return $this->hasOne(PointRedemtion::class);
     }
 }

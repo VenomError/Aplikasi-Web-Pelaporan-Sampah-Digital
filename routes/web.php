@@ -42,8 +42,9 @@ Route::get('/email/verify/{id}/{hash}', [MailVerifyController::class, 'verify'])
 */
 Volt::route('/', 'landing.index')->name('home');
 
-Route::prefix('/dashboard')->middleware(['auth', 'verified'])->name('dashboard')->group(function () {
+Route::prefix('/dashboard')->middleware(['auth', 'verified', 'role:admin'])->name('dashboard')->group(function () {
     Volt::route('/', 'dashboard.index');
+    Volt::route('/report-map', 'dashboard.report-map')->name('.report-map');
 
     Volt::route('/account/{role}', 'account.account-list')->name('.account.list');
     Volt::route('/incentive', 'incentive.incentive-list')->name('.incentive.list');

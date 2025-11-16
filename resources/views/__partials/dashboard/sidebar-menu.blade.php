@@ -1,8 +1,8 @@
 @use('App\Enum\UserRole')
 <x-dashboard.side-menu title="Dashboard">
     <x-dashboard.side-item title="Dashboard" :href="route('dashboard')" icon="dashboard-line" />
-    <x-dashboard.side-item title="Map Penjemputan" :href="route('dashboard')" icon="map-line" />
-    <x-dashboard.side-item title="Penukaran Point" :href="route('dashboard')" icon="exchange-line"  />
+    <x-dashboard.side-item title="Map Penjemputan" :href="route('dashboard.report-map')" icon="map-line" />
+    <x-dashboard.side-item title="Penukaran Point" :href="route('dashboard')" icon="exchange-line" />
 </x-dashboard.side-menu>
 
 <x-dashboard.side-menu title="Laporan">

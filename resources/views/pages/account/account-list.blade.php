@@ -1,6 +1,7 @@
 <?php
 use App\Models\User;
 use App\Enum\UserRole;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
@@ -20,6 +21,14 @@ new class extends Component {
     public function mount(UserRole $role)
     {
         $this->role = $role;
+    }
+
+    #[On('hide:modal')]
+    public function onHideModal($id)
+    {
+        if ($id == 'modalAddAccount') {
+            $this->render();
+        }
     }
 
     public function updatedSearch()
@@ -43,6 +52,7 @@ new class extends Component {
     {
         $this->dispatch('show:modal', id: 'modalDeleteAccount');
         $this->selectedUser = $user;
+        $this->resetPage();
     }
 
     public function deleteConfirmed()
@@ -106,19 +116,9 @@ new class extends Component {
                     <td>{{ $user->created_at->format('Y-m-d h:i') }}</td>
                     <td>
                         <div class="hstack fs-15 justify-content-center gap-2">
-                            <x-button.icon-action
-                                type="a"
-                                href="/"
-                                icon="ri ri-eye-line"
-                                color="info"
-                            />
-                            <x-button.icon-action
-                                type="button"
-                                wire:click="confirmDelete({{ $user->id }})"
-                                target="confirmDelete({{ $user->id }})"
-                                icon="ri ri-delete-bin-line"
-                                color="danger"
-                            />
+                            <x-button.icon-action type="a" href="/" icon="ri ri-eye-line" color="info" />
+                            <x-button.icon-action type="button" wire:click="confirmDelete({{ $user->id }})"
+                                target="confirmDelete({{ $user->id }})" icon="ri ri-delete-bin-line" color="danger" />
                         </div>
                     </td>
                 </tr>

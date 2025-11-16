@@ -23,6 +23,7 @@ new class extends Component {
     {
         if ($this->form->add($this->role)) {
             $this->dispatch('hide:modal', id: 'modalAddAccount');
+            $this->dispatch('refresh');
         }
     }
 };
@@ -33,8 +34,7 @@ new class extends Component {
             @if ($form->avatar && method_exists($form->avatar, 'temporaryUrl'))
                 <div class="d-flex justify-content-center">
                     <img class="avatar avatar-xxl img-fluid rounded-circle" src="{{ $form->avatar->temporaryUrl() }}"
-                        alt=""
-                    >
+                        alt="">
                 </div>
             @endif
             <x-input type="text" label="Full Name" wire:model='form.name' />

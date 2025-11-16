@@ -1,12 +1,16 @@
 <?php
 use App\Models\Incentive;
+use Livewire\Attributes\On;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
+use App\Repository\IncentiveRepository;
 
 new class extends Component {
     use WithPagination;
     public $search = '';
+
+    public $selectedIncentive;
 
     #[Computed]
     public function incentives()
@@ -25,8 +29,38 @@ new class extends Component {
         $incentive->is_active = !$incentive->is_active;
         $incentive->save();
         $incentive->refresh();
-        if($incentive->is_active){
-            flash("incentive Activated");
+        if ($incentive->is_active) {
+            flash('incentive Activated');
+        }
+    }
+
+    public function confirmDelete(Incentive $incentive)
+    {
+        $this->dispatch('show:modal', id: 'modalDeleteIncentive');
+        $this->selectedIncentive = $incentive;
+    }
+    public function setToEdit(Incentive $incentive)
+    {
+        $this->dispatch('show:modal', id: 'modalEditIncentive');
+        $this->selectedIncentive = $incentive;
+    }
+
+    public function deleteConfirmed()
+    {
+        $repo = new IncentiveRepository();
+        if ($repo->delete($this->selectedIncentive)) {
+            sweetalert('Delete Incentive Success', title: 'Success');
+        } else {
+            sweetalert('Delete Incentive Success', title: 'Success', type: 'error');
+        }
+        $this->dispatch('hide:modal', id: 'modalDeleteIncentive');
+        $this->reset('selectedIncentive');
+    }
+    #[On('hide:modal')]
+    public function onHideModal($id)
+    {
+        if ($id == 'modalAddIncentive') {
+            $this->render();
         }
     }
 };
@@ -36,6 +70,9 @@ new class extends Component {
         <x-dashboard.page-title-item title="insentif" />
     </x-dashboard.page-title>
     <x-table :search="$search" col="5" :paginate="$this->incentives()">
+        <x-slot:header>
+            <x-button.add title="Add Incentive" @click="$dispatch('show:modal', { id: 'modalAddIncentive' })" />
+        </x-slot:header>
         <x-slot:head>
             <tr class="text-center">
                 <th>Insentif</th>
@@ -58,14 +95,8 @@ new class extends Component {
                     </td>
                     <td class="text-center">
                         <div class="form-check form-switch form-check-lg m-0">
-                            <input
-                                class="form-check-input"
-                                id="switch-lg"
-                                type="checkbox"
-                                role="switch"
-                                wire:change='toggleStatus({{ $incentive->id }})'
-                                @checked($incentive->is_active)
-                            />
+                            <input class="form-check-input" id="switch-lg" type="checkbox" role="switch"
+                                wire:change='toggleStatus({{ $incentive->id }})' @checked($incentive->is_active) />
                         </div>
                     </td>
 
@@ -73,19 +104,12 @@ new class extends Component {
                     <td class="text-center">{{ $incentive->redemtions_count }}</td>
                     <td>
                         <div class="hstack fs-15 justify-content-center gap-2">
-                            <x-button.icon-action
-                                type="a"
-                                href="/"
-                                icon="ri ri-eye-line"
-                                color="info"
-                            />
-                            <x-button.icon-action
-                                type="button"
-                                wire:click="confirmDelete({{ $incentive->id }})"
-                                target="confirmDelete({{ $incentive->id }})"
-                                icon="ri ri-delete-bin-line"
-                                color="danger"
-                            />
+                            <x-button.icon-action type="a" href="/" icon="ri ri-eye-line" color="info" />
+                            <x-button.icon-action type="button" wire:click="setToEdit({{ $incentive->id }})"
+                                target="setToEdit({{ $incentive->id }})" icon="ri ri-pencil-line" color="warning" />
+                            <x-button.icon-action type="button" wire:click="confirmDelete({{ $incentive->id }})"
+                                target="confirmDelete({{ $incentive->id }})" icon="ri ri-delete-bin-line"
+                                color="danger" />
                         </div>
                     </td>
                 </tr>
@@ -94,4 +118,13 @@ new class extends Component {
             @endforelse
         </x-slot:body>
     </x-table>
+
+    {{-- MODAL --}}
+    <x-modal id="modalAddIncentive" title="Add Incentive" backDrop>
+        <livewire:incentive.incentive-add />
+    </x-modal>
+    <x-modal id="modalEditIncentive" title="Edit Incentive" backDrop>
+        <livewire:incentive.incentive-edit :incentive="$selectedIncentive" />
+    </x-modal>
+    <x-modal-delete id="modalDeleteIncentive" confirmAction="deleteConfirmed()" />
 </div>

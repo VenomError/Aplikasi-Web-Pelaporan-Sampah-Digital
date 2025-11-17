@@ -1,32 +1,51 @@
 <?php
+use App\Models\Report;
+use App\Enum\ReportStatus;
 use Livewire\Volt\Component;
 use Livewire\Attributes\Title;
-use App\Enum\ReportStatus;
+use Livewire\Attributes\Computed;
 
 new #[Title('Map Penjemputan')] class extends Component {
-    public $reports = [];
+    public $baseQuery;
+    public $filter = [];
 
-    public function mount()
+    public function render(): mixed
     {
-        $baseLat = -5.1477;
-        $baseLng = 119.4327;
-
-        // Buat 10 data acak sekitar Makassar
-        for ($i = 1; $i <= 10; $i++) {
-            $status = ReportStatus::random();
-
-            $this->reports[] = [
-                'id' => $i,
-                'title' => "Laporan #$i",
-                'status' => $status->name,
-                'color' => $status->color(),
-                'latitude' => $baseLat + mt_rand(-50, 50) / 1000,
-                'longitude' => $baseLng + mt_rand(-50, 50) / 1000,
-                'address' => "Jl. Contoh No. $i, Makassar",
-                'member_name' => "Member $i",
-                'operator_name' => 'Operator ' . chr(64 + $i), // A, B, C, ...
-            ];
+        return parent::render();
+    }
+    #[Computed]
+    public function reports()
+    {
+        $query = Report::latest();
+        if ($this->filter) {
+            $query->where($this->filter);
         }
+        return $query
+            ->get()
+            ->map(function ($report) {
+                return [
+                    'id' => $report->id,
+                    'title' => $report->title,
+                    'status' => $report->status->name,
+                    'color' => $report->status->color(),
+                    'latitude' => $report->latitude,
+                    'longitude' => $report->longitude,
+                    'address' => $report->address,
+                    'member_name' => $report->member?->account?->name ?? 'Tidak Ada',
+                    'operator_name' => $report->operator?->account?->name ?? 'Tidak Ada',
+                ];
+            })
+            ->toArray();
+    }
+    #[Computed]
+    public function reportCountByStatus(ReportStatus $status): int
+    {
+        $query = Report::latest();
+        if ($this->filter) {
+            $query->where($this->filter);
+        }
+        $query->where('status', $status);
+        return $query->count();
     }
 };
 ?>
@@ -35,8 +54,17 @@ new #[Title('Map Penjemputan')] class extends Component {
     <x-dashboard.page-title title="Map Penjemputan">
         <x-dashboard.page-title-item title="Map Penjemputan" />
     </x-dashboard.page-title>
-
-    <div x-data="mapComponent({ reports: $wire.reports })" x-init="init()" class="position-relative border rounded shadow-sm"
+    <div class="row justify-content-center">
+        <x-widget.dash-count class="col-lg-6" title="Total Laporan" :count="count($this->reports())" color="primary"
+            icon="ri-file-list-fill" />
+        <x-widget.dash-count class="col-lg-6" :title="ReportStatus::COMPLETED->value" :count="$this->reportCountByStatus(ReportStatus::COMPLETED)" :color="ReportStatus::COMPLETED->color()" :icon="ReportStatus::COMPLETED->icon()" />
+        @foreach (ReportStatus::cases() as $status)
+            @if ($status != ReportStatus::COMPLETED)
+                <x-widget.dash-count :title="$status->value" :count="$this->reportCountByStatus($status)" :color="$status->color()" :icon="$status->icon()" />
+            @endif
+        @endforeach
+    </div>
+    <div x-data="mapComponent({ reports: @js($this->reports()) })" x-init="init()" class="position-relative border rounded shadow-sm"
         style="height: 500px;">
         <div id="map" class="position-absolute top-0 start-0 w-100 h-100"></div>
 

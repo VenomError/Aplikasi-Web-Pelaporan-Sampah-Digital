@@ -48,4 +48,6 @@ Route::prefix('/dashboard')->middleware(['auth', 'verified', 'role:admin'])->nam
 
     Volt::route('/account/{role}', 'account.account-list')->name('.account.list');
     Volt::route('/incentive', 'incentive.incentive-list')->name('.incentive.list');
+
+    Volt::route('/laporan/penjemputan-sampah', 'laporan.penjemputan-sampah')->name('.laporan.penjemputan-sampah');
 });

@@ -6,7 +6,7 @@
 </x-dashboard.side-menu>
 
 <x-dashboard.side-menu title="Laporan">
-    <x-dashboard.side-item title="Penjemputan Sampah" :href="route('dashboard.account.list', ['role' => UserRole::ADMIN])" icon="caravan-line" />
+    <x-dashboard.side-item title="Penjemputan Sampah" :href="route('dashboard.laporan.penjemputan-sampah', ['role' => UserRole::ADMIN])" icon="caravan-line" />
     <x-dashboard.side-item title="History Penukaran" :href="route('dashboard.account.list', ['role' => UserRole::ADMIN])" />
 </x-dashboard.side-menu>
 

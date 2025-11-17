@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Enum\ReportStatus;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
+    use HasFactory;
 
     protected $fillable = [
         'title',
@@ -28,5 +30,15 @@ class Report extends Model
     public function pointRedemtion()
     {
         return $this->hasOne(PointRedemtion::class);
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'member_id');
+    }
+
+    public function operator()
+    {
+        return $this->belongsTo(Operator::class, 'operator_id');
     }
 }

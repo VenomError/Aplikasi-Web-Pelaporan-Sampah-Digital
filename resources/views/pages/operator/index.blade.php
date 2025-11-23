@@ -1,75 +1,56 @@
 <?php
-use App\Models\Report;
-use App\Models\Incentive;
 use App\Enum\ReportStatus;
-use Livewire\Attributes\On;
+use Carbon\Carbon;
+use Livewire\Attributes\Computed;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
-use Livewire\Attributes\Computed;
-use App\Repository\IncentiveRepository;
 
 new class extends Component {
     use WithPagination;
     public $search = '';
+    public $date;
+    public $status = ReportStatus::PENDING;
 
-    public $selectedReport;
+    public function mount()
+    {
+        if (!$this->date) {
+            $this->date = now()->format('Y-m-d');
+        }
+    }
 
     #[Computed]
     public function reports()
     {
-        $query = Report::query();
-        $query->orderBy('created_at', 'desc');
+        $operator = auth()->user()->owner;
+
+        $query = $operator->reports();
+        $query->when($this->status, fn($q) => $q->whereStatus($this->status));
+        $query->when($this->date, fn($q) => $q->whereDate('created_at', Carbon::parse($this->date)));
         $query->when($this->search, function ($q) {
             $q->search(['title', 'description', 'address'], $this->search);
         });
-
-        return $query->paginate(5);
+        $query->orderBy('created_at', 'desc');
+        return $query->paginate();
     }
 
-    public function confirmDelete(Report $report)
-    {
-        // handle delete
-        $this->dispatch('show:modal', id: 'modalDeleteReport');
-        $this->selectedReport = $report;
-    }
-    public function setToEdit(Report $report)
-    {
-        $this->dispatch('show:modal', id: 'modalEditReport');
-        $this->selectedReport = $report;
-    }
-
-    public function deleteConfirmed()
-    {
-        // delete
-        $this->dispatch('hide:modal', id: 'modalDeleteReport');
-        $this->reset('selectedReport');
-    }
-    #[On('hide:modal')]
-    public function onHideModal($id)
-    {
-        if ($id == 'modalDeleteReport') {
-            $this->render();
-        }
-    }
-    public function export() {}
     #[Computed]
-    public function reportCountByStatus(ReportStatus $status): int
+    public function reportCountByStatus(?ReportStatus $status = null): int
     {
-        $query = Report::latest();
-        $query->where('status', $status);
+        $operator = auth()->user()->owner;
+
+        $query = $operator->reports();
+        $query->when($status, fn($q) => $q->whereStatus($status));
+        $query->when($this->date, fn($q) => $q->whereDate('created_at', Carbon::parse($this->date)));
         return $query->count();
     }
 };
 ?>
 <div>
-    <x-dashboard.page-title title="Laporan Penjemputan Sampah">
-        <x-dashboard.page-title-item title="Penjemputan Sampah" />
-    </x-dashboard.page-title>
     <div class="row justify-content-center">
         <x-widget.dash-count
             class="col-lg-6"
             title="Total Laporan"
-            :count="$this->reports()->total()"
+            :count="$this->reportCountByStatus()"
             color="success"
             icon="ri-file-list-fill"
         />
@@ -91,12 +72,24 @@ new class extends Component {
             @endif
         @endforeach
     </div>
+
     <x-table
         :search="$search"
-        col="5"
+        col="7"
         :paginate="$this->reports()"
     >
         <x-slot:header>
+            <input
+                class="form-control me-3"
+                type="date"
+                wire:model.live="date"
+            />
+            <select class="form-select" wire:model.live="status">
+                <option disabled>select status</option>
+                @foreach (ReportStatus::cases() as $status)
+                    <option value="{{ $status->value }}">{{ $status->value }}</option>
+                @endforeach
+            </select>
         </x-slot:header>
         <x-slot:head>
             <tr class="text-center">
@@ -104,7 +97,7 @@ new class extends Component {
                 <th>Image</th>
                 <th>Address</th>
                 <th>Member</th>
-                <th>Operator</th>
+                <th>Report At</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -126,32 +119,20 @@ new class extends Component {
                     </td>
                     <td>{{ $report->address }}</td>
                     <td>{{ $report->member->account->name }}</td>
-                    <td>{{ $report->operator?->account?->name ?? 'Belum Ada' }}</td>
+                    <td>{{ $report->created_at->format('D d-m-y H:i') }}</td>
                     <td>
                         <button class="btn btn-sm btn-{{ $report->status->color() }}">{{ $report->status }}</button>
                     </td>
                     <td>
                         <div class="hstack fs-15 justify-content-center gap-2">
-                            <x-button.icon-action
-                                type="a"
-                                href="/"
-                                icon="ri ri-eye-line"
-                                color="info"
-                            />
-                            <x-button.icon-action
-                                type="button"
-                                wire:click="setToEdit({{ $report->id }})"
-                                target="setToEdit({{ $report->id }})"
-                                icon="ri ri-pencil-line"
-                                color="warning"
-                            />
-                            <x-button.icon-action
-                                type="button"
-                                wire:click="confirmDelete({{ $report->id }})"
-                                target="confirmDelete({{ $report->id }})"
-                                icon="ri ri-delete-bin-line"
-                                color="danger"
-                            />
+                            <a
+                                class="btn btn-icon btn-sm btn-info"
+                                href="https://www.google.com/maps/dir/?api=1&destination={{ $report->latitude }},{{ $report->longitude }}"
+                                target='_blank'
+                            >
+                                <i class="ri ri-map-pin-line"></i>
+                            </a>
+
                         </div>
                     </td>
                 </tr>
@@ -160,6 +141,4 @@ new class extends Component {
             @endforelse
         </x-slot:body>
     </x-table>
-    {{-- MODAL --}}
-    <x-modal-delete id="modalDeleteReport" confirmAction="deleteConfirmed()" />
 </div>

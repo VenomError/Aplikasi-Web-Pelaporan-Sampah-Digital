@@ -51,3 +51,9 @@ Route::prefix('/dashboard')->middleware(['auth', 'verified', 'role:admin'])->nam
 
     Volt::route('/laporan/penjemputan-sampah', 'laporan.penjemputan-sampah')->name('.laporan.penjemputan-sampah');
 });
+
+Route::prefix('/operator')->middleware(['auth', 'verified', 'role:operator'])->name('operator')->group(function () {
+    Volt::route('/', 'operator.index');
+    Volt::route('/map', 'operator.map')->name('.map');
+    Volt::route('/history', 'operator.history')->name('.history');
+});

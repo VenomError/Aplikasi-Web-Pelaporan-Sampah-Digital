@@ -1,23 +1,18 @@
 <div class="header">
-
-    <!-- Logo -->
-    <div class="header-left active">
-        <a class="logo logo-normal" href="{{ route('dashboard') }}">
-            <x-img src="assets/img/logo.png" alt="" />
+    <div class="header-left active d-flex align-items-center">
+        <a class="logo logo-normal text-decoration-none d-flex align-items-center text-center" href="#">
+            <i class="ri-recycle-fill  text-primary me-2" style="font-size: 50px;"></i>
+            <b class="fw-bold text-primary" style="font-size: 30px">RECYCLE</b>
         </a>
-        <a class="logo logo-white" href="{{ route('dashboard') }}">
-            <x-img src="assets/img/logo-white.png" alt="" />
-        </a>
-        <a class="logo-small" href="{{ route('dashboard') }}">
-            <x-img src="assets/img/logo-small.png" alt="" />
-        </a>
-        {{-- <a id="toggle_btn" href="javascript:void(0);">
-            <i class="feather-16" data-feather="chevrons-left"></i>
-        </a> --}}
     </div>
+
     <!-- /Logo -->
 
-    <a class="mobile_btn" id="mobile_btn" href="#sidebar">
+    <a
+        class="mobile_btn"
+        id="mobile_btn"
+        href="#sidebar"
+    >
         <span class="bar-icon">
             <span></span>
             <span></span>
@@ -60,25 +55,31 @@
         <li class="nav-item nav-item-box">
         </li>
         <li class="nav-item dropdown has-arrow main-drop">
-            <a class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown" href="javascript:void(0);">
-                <span class="user-info">
-                    <span class="user-letter">
-                        <x-img class="img-fluid" src="assets/img/profiles/avator1.jpg" alt="" />
+            <a
+                class="dropdown-toggle nav-link userset"
+                data-bs-toggle="dropdown"
+                href="javascript:void(0);"
+            >
+                <span class="user-info ">
+                    <span class="user-letter  rounded-circle">
+                        <x-img
+                            class="img-fluid  rounded-circle"
+                            src="assets/img/profiles/avator1.jpg"
+                            alt=""
+                        />
                     </span>
                     <span class="user-detail">
-                        <span class="user-name">John Smilga</span>
-                        <span class="user-role">Super Admin</span>
+                        <span class="user-name">{{ auth()->user()->name }}</span>
+                        <span class="user-role">{{ auth()->user()->getRoleNames()->first() }}</span>
                     </span>
                 </span>
             </a>
             <div class="dropdown-menu menu-drop-user">
                 <div class="profilename">
                     <div class="profileset">
-                        <span class="user-img"><x-img src="assets/img/profiles/avator1.jpg" alt="" />
-                            <span class="status online"></span></span>
                         <div class="profilesets">
-                            <h6>John Smilga</h6>
-                            <h5>Super Admin</h5>
+                            <h6>{{ auth()->user()->name }}</h6>
+                            <h5>{{ auth()->user()->getRoleNames()->first() }}</h5>
                         </div>
                     </div>
                     <hr class="m-0">
@@ -87,8 +88,10 @@
                     <a class="dropdown-item" href="general-settings.html"><i class="me-2"
                             data-feather="settings"></i>Settings</a>
                     <hr class="m-0">
-                    <a class="dropdown-item logout pb-0" href="signin.html"><x-img class="me-2"
-                            src="assets/img/icons/log-out.svg" alt="img"
+                    <a class="dropdown-item logout pb-0" href="{{ url('/logout') }}"><x-img
+                            class="me-2"
+                            src="assets/img/icons/log-out.svg"
+                            alt="img"
                         />Logout</a>
                 </div>
             </div>

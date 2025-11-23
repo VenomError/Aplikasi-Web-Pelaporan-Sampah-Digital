@@ -17,7 +17,7 @@ enum ReportStatus: string
             self::PROCESSING => 'info',
             self::COMPLETED => 'success',
             self::REJECTED => 'danger',
-            self::CANCELLED => 'dark',
+            self::CANCELLED => 'danger',
         };
     }
     public function icon(): string

@@ -2,9 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Enum\ReportStatus;
+use App\Models\Member;
 use App\Models\Report;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Repository\ReportRepository;
 use Illuminate\Database\Seeder;
+
+
 use function Laravel\Prompts\{
     text,
     error,
@@ -25,9 +29,19 @@ class ReportSeeder extends Seeder
         info("Seeding Report");
 
         $count = (int) text("Jumlah Report Seeder");
-        progress("Create Report", range(1, $count), function ($step, $progress) {
+        $repo = new ReportRepository();
+        progress("Create Report", range(1, $count), function ($step, $progress) use ($repo)  {
             try {
-                Report::factory()->create();
+               $data = [
+                    'title' => fake()->text(),
+                    'description' => fake()->paragraph(),
+                    'image' => 'https://placehold.co/400/png',
+                    'latitude' => fake()->randomFloat(6, -5.25, -5.05),   // Makassar
+                    'longitude' => fake()->randomFloat(6, 119.35, 119.50), // Makassar
+                    'address' => fake()->address(),
+               ];
+
+                $repo->create($data,Member::inRandomOrder()->first());
             } catch (\Throwable $th) {
                 error($th->getMessage());
             }

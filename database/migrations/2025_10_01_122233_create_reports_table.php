@@ -16,7 +16,7 @@ return new class extends Migration {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Member::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Operator::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Operator::class)->nullable()->constrained()->nullOnDelete();
             $table->string('title');
             $table->text('description')->nullable();
             $table->enum('status', ReportStatus::cases())->default(ReportStatus::PENDING);

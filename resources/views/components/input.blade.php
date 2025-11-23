@@ -1,13 +1,14 @@
 @props([
     'label' => null,
     'placeholder' => null,
+    'parentClass' => 'mb-3'
 ])
 
 @php
     $model = $attributes->wire('model')->value();
 @endphp
 
-<div class="mb-3">
+<div class="{{ $parentClass }}">
     <label class="form-label" for="{{ $model }}">{{ Str::title($label) }}</label>
 
     <input

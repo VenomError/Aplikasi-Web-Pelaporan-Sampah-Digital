@@ -17,8 +17,8 @@ return new class extends Migration {
         Schema::create('point_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Member::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Report::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(PointRedemtion::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Report::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(PointRedemtion::class)->nullable()->constrained()->nullOnDelete();
             $table->integer('points_change')->default(0);
             $table->enum('type', PointHistoryType::cases());
             $table->timestamps();

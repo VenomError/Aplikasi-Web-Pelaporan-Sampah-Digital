@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms\Auth;
 
+use App\Enum\UserRole;
 use Livewire\Form;
 use App\Services\AuthService;
 use Livewire\Attributes\Validate;
@@ -34,8 +35,14 @@ class LoginForm extends Form
             if (!$isLogin) {
                 $this->addError('login', 'Invalid Email or Password');
             }
-            sweetalert("Welcome ".auth()->user()->name , title:"Login Success");
-            return redirect()->intended('/');
+            sweetalert("Welcome " . auth()->user()->name, title: "Login Success");
+
+            $role = UserRole::tryFrom(auth()->user()->getRoleNames()->first());
+            return match ($role) {
+                UserRole::ADMIN => redirect()->intended("/dashboard"),
+                UserRole::OPERATOR => redirect()->intended("/operator"),
+                default => redirect()->intended("/operator"),
+            };
         } catch (\Throwable $th) {
             $this->addError('login', $th->getMessage());
         }

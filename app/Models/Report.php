@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enum\ReportStatus;
+use App\Services\AddressService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -41,4 +42,5 @@ class Report extends Model
     {
         return $this->belongsTo(Operator::class, 'operator_id');
     }
+
 }
